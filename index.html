@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TLP — Technical Line Projects S.A.S. | Infraestructura de Redes</title>
+  <meta name="description" content="Technical Line Projects (TLP) S.A.S. — Ingeniería en cableado estructurado, racks de comunicaciones y arquitectura de red corporativa en San José, Uruguay.">
+
+  <!-- DUPLA TIPOGRÁFICA EDITORIAL: Space Grotesk (Titulares), Work Sans (Cuerpo), Space Mono (Telemetría) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES DE DISEÑO — ESTILO EDITORIAL SUIZO / BRUTALISMO TÉCNICO
+       Paleta austera, contundente y quirúrgica basada en el logo TLP
+       ========================================================================== */
+    :root {
+      --tlp-black: #080808;           /* Fondo negro carbón mate absoluto */
+      --tlp-surface: #101114;         /* Superficie técnica grafito */
+      --tlp-surface-subtle: #16171c;  /* Cuadrante secundario */
+      --tlp-white: #f4f4f2;           /* Blanco tiza de alto contraste */
+      --tlp-steel: #8b929e;           /* Gris acero para cotas y metadatos */
+      --tlp-line: rgba(255, 255, 255, 0.12); /* Líneas estructurales puras de 1px */
+      --tlp-line-bold: rgba(255, 255, 255, 0.28);
+      --tlp-blue: #0072fe;            /* Azul cobalto exacto del logo (la "L" y "LINE") */
+      --tlp-blue-hover: #005cd0;
+      --tlp-blue-tint: rgba(0, 114, 254, 0.1);
+      
+      --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: "Work Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: "Space Mono", monospace;
+      
+      --ease-mechanical: cubic-bezier(0.16, 1, 0.3, 1);
+      --transition: all 0.22s var(--ease-mechanical);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--tlp-black);
+      color: var(--tlp-white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    /* ==========================================================================
+       GRILLA EDITORIAL & TIPOGRAFÍA MONUMENTAL
+       ========================================================================== */
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    .meta-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--tlp-steel);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .meta-tag .tag-indicator {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--tlp-blue);
+    }
+
+    .section-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+      color: var(--tlp-white);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-headline span.accent {
+      color: var(--tlp-blue);
+    }
+
+    .lead-paragraph {
+      font-size: 1.15rem;
+      color: var(--tlp-steel);
+      line-height: 1.65;
+      max-width: 680px;
+    }
+
+    /* BOTONES ARQUITECTÓNICOS */
+    .btn-swiss {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 0.9rem 1.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      user-select: none;
+    }
+
+    .btn-swiss-primary {
+      background: var(--tlp-blue);
+      color: #ffffff;
+      border-color: var(--tlp-blue);
+    }
+
+    .btn-swiss-primary:hover {
+      background: #ffffff;
+      color: var(--tlp-black);
+      border-color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .btn-swiss-ghost {
+      background: transparent;
+      border-color: var(--tlp-line-bold);
+      color: var(--tlp-white);
+    }
+
+    .btn-swiss-ghost:hover {
+      border-color: var(--tlp-blue);
+      color: var(--tlp-blue);
+      background: var(--tlp-blue-tint);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       BARRA DE NAVEGACIÓN — ESTILO SUIZO MINIMALISTA
+       ========================================================================== */
+    .top-masthead {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 8, 8, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--tlp-line);
+    }
+
+    .masthead-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 78px;
+    }
+
+    .brand-identity {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .brand-logo-file {
+      height: 42px;
+      width: auto;
+      display: block;
+    }
+
+    .brand-subtext {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--tlp-steel);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border-left: 1px solid var(--tlp-line);
+      padding-left: 1rem;
+      line-height: 1.3;
+    }
+
+    .navigation-links {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+    }
+
+    .nav-anchor {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--tlp-steel);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      position: relative;
+      padding: 0.4rem 0;
+    }
+
+    .nav-anchor:hover, .nav-anchor.active {
+      color: var(--tlp-white);
+    }
+
+    .nav-anchor::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--tlp-blue);
+      transition: var(--transition);
+    }
+
+    .nav-anchor:hover::after, .nav-anchor.active::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .masthead-phone {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--tlp-white);
+      letter-spacing: 0.05em;
+    }
+
+    .masthead-phone:hover {
+      color: var(--tlp-blue);
+    }
+
+    .mobile-burger-btn {
+      display: none;
+      background: none;
+      border: 1px solid var(--tlp-line);
+      color: var(--tlp-white);
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       HERO ASIMÉTRICO — TITULAR MONUMENTAL + CARRUSEL DE OBRA (16:9)
+       ========================================================================== */
+    .hero-layout {
+      padding: 4rem 0 5rem 0;
+      border-bottom: 1px solid var(--tlp-line);
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-editorial {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 4.2vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: var(--tlp-white);
+    }
+
+    .hero-headline span.accent {
+      color: var(--tlp-blue);
+    }
+
+    .hero-actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .hero-telemetry-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--tlp-line);
+      margin-top: 1rem;
+    }
+
+    .telemetry-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .telemetry-val {
+      font-family: var(--font-mono);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--tlp-white);
+    }
+
+    .telemetry-val span {
+      color: var(--tlp-blue);
+    }
+
+    .telemetry-lbl {
+      font-size: 0.78rem;
+      color: var(--tlp-steel);
+      line-height: 1.35;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+    }
+
+    /* ==========================================================================
+       CARRUSEL PANORÁMICO DE INSPECCIÓN TÉCNICA (5 FOTOS)
+       ========================================================================== */
+    .inspection-viewer {
+      border: 1px solid var(--tlp-line-bold);
+      background: var(--tlp-surface);
+      position: relative;
+    }
+
+    .viewer-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid var(--tlp-line);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--tlp-steel);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .viewer-live-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--tlp-blue);
+      font-weight: 700;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--tlp-blue);
+      box-shadow: 0 0 6px var(--tlp-blue);
+    }
+
+    .viewer-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #000000;
+    }
+
+    .viewer-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease;
+    }
+
+    .viewer-slide.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .viewer-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: contrast(1.04);
+    }
+
+    .viewer-caption-panel {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.4rem 1.6rem;
+      background: linear-gradient(180deg, transparent 0%, rgba(8, 8, 8, 0.85) 40%, rgba(8, 8, 8, 0.98) 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      z-index: 5;
+    }
+
+    .caption-meta {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--tlp-blue);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .caption-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--tlp-white);
+      letter-spacing: -0.02em;
+    }
+
+    .caption-desc {
+      font-size: 0.85rem;
+      color: var(--tlp-steel);
+      line-height: 1.4;
+      max-width: 90%;
+    }
+
+    /* CONTROLES FLECHAS SUIZAS */
+    .viewer-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      background: rgba(8, 8, 8, 0.85);
+      border: 1px solid var(--tlp-line-bold);
+      color: var(--tlp-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: var(--transition);
+    }
+
+    .viewer-nav-btn:hover {
+      background: var(--tlp-blue);
+      border-color: var(--tlp-blue);
+      color: #ffffff;
+    }
+
+    .viewer-nav-btn.prev {
+      left: 12px;
+    }
+
+    .viewer-nav-btn.next {
+      right: 12px;
+    }
+
+    /* BARRA INFERIOR DE PROGRESO Y CONTADOR */
+    .viewer-footer-dock {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.25rem;
+      background: var(--tlp-surface);
+      border-top: 1px solid var(--tlp-line);
+      gap: 1.5rem;
+    }
+
+    .indicators-segmented-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-grow: 1;
+    }
+
+    .segmented-step {
+      flex: 1;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .segmented-step.active {
+      background: var(--tlp-line-bold);
+    }
+
+    .step-progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--tlp-blue);
+    }
+
+    .segmented-step.active .step-progress-fill {
+      width: 100%;
+      transition: width 4.5s linear;
+    }
+
+    .viewer-counter-display {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--tlp-steel);
+      white-space: nowrap;
+    }
+
+    .viewer-counter-display span.active-num {
+      color: var(--tlp-white);
+    }
+
+    /* ==========================================================================
+       MANIFIESTO / IDENTIDAD DE NOMBRE TLP
+       ========================================================================== */
+    .manifesto-ribbon {
+      border-bottom: 1px solid var(--tlp-line);
+      background: var(--tlp-surface);
+      padding: 4.5rem 0;
+    }
+
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 4rem;
+      align-items: flex-start;
+    }
+
+    .manifesto-pillars {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--tlp-line);
+    }
+
+    .pillar-row {
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--tlp-line);
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1.5rem;
+      align-items: baseline;
+    }
+
+    .pillar-word {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--tlp-blue);
+    }
+
+    .pillar-meaning {
+      font-size: 0.95rem;
+      color: var(--tlp-steel);
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       GRILLA MODULAR DE SERVICIOS — CUADRANTES DE 1PX
+       ========================================================================== */
+    .section-padding {
+      padding: 5.5rem 0;
+      border-bottom: 1px solid var(--tlp-line);
+    }
+
+    .modular-services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-top: 1px solid var(--tlp-line);
+      border-left: 1px solid var(--tlp-line);
+      margin-top: 2.5rem;
+    }
+
+    .service-quadrant {
+      padding: 3rem;
+      border-right: 1px solid var(--tlp-line);
+      border-bottom: 1px solid var(--tlp-line);
+      background: var(--tlp-black);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 320px;
+      transition: var(--transition);
+    }
+
+    .service-quadrant:hover {
+      background: var(--tlp-surface);
+    }
+
+    .quadrant-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+
+    .quadrant-index {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--tlp-blue);
+      letter-spacing: 0.06em;
+    }
+
+    .quadrant-code {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--tlp-steel);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .quadrant-title {
+      font-family: var(--font-display);
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--tlp-white);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .quadrant-text {
+      color: var(--tlp-steel);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .spec-points-list {
+      list-style: none;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--tlp-white);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--tlp-line);
+    }
+
+    .spec-points-list li::before {
+      content: "+ ";
+      color: var(--tlp-blue);
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       GALERÍA DE PROYECTOS / DISPOSICIÓN ASIMÉTRICA
+       ========================================================================== */
+    .editorial-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .gallery-tile {
+      border: 1px solid var(--tlp-line);
+      background: var(--tlp-surface);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+
+    .gallery-tile:hover {
+      border-color: var(--tlp-blue);
+    }
+
+    .gallery-tile.col-span-7 {
+      grid-column: span 7;
+    }
+
+    .gallery-tile.col-span-5 {
+      grid-column: span 5;
+    }
+
+    .gallery-tile.col-span-4 {
+      grid-column: span 4;
+    }
+
+    .tile-visual-wrap {
+      width: 100%;
+      height: 280px;
+      overflow: hidden;
+      background: #000000;
+      position: relative;
+    }
+
+    .tile-visual {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.4s var(--ease-mechanical);
+    }
+
+    .gallery-tile:hover .tile-visual {
+      transform: scale(1.03);
+    }
+
+    .tile-meta-content {
+      padding: 1.5rem;
+      border-top: 1px solid var(--tlp-line);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .tile-meta-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--tlp-blue);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .tile-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--tlp-white);
+    }
+
+    .tile-desc {
+      font-size: 0.85rem;
+      color: var(--tlp-steel);
+      line-height: 1.45;
+    }
+
+    /* ==========================================================================
+       DOSSIER EDITORIAL — PERFIL PROFESIONAL DE ARMANDO MURITOS DEL POZO
+       ========================================================================== */
+    .dossier-frame {
+      border: 1px solid var(--tlp-line-bold);
+      background: var(--tlp-surface);
+      padding: 3.5rem;
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 3.5rem;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .dossier-corner-stamp {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--tlp-steel);
+      border: 1px solid var(--tlp-line);
+      padding: 0.35rem 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .dossier-portrait-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .portrait-image-mount {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--tlp-line-bold);
+      background: #000000;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .portrait-image-mount img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .id-credential-plate {
+      border: 1px solid var(--tlp-line);
+      background: var(--tlp-black);
+      padding: 0.85rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--tlp-steel);
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .id-credential-plate strong {
+      color: var(--tlp-white);
+    }
+
+    .status-active-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--tlp-blue);
+      font-weight: 700;
+      font-size: 0.72rem;
+      margin-top: 0.2rem;
+    }
+
+    .dossier-body-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .technician-name-title {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--tlp-white);
+    }
+
+    .technician-rank {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      color: var(--tlp-blue);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .technician-narrative {
+      font-size: 1.05rem;
+      color: var(--tlp-steel);
+      line-height: 1.7;
+    }
+
+    .competency-matrix {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      border-top: 1px solid var(--tlp-line);
+      padding-top: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .matrix-item h5 {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--tlp-white);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.4rem;
+    }
+
+    .matrix-item h5::before {
+      content: "■ ";
+      color: var(--tlp-blue);
+    }
+
+    .matrix-item p {
+      font-size: 0.88rem;
+      color: var(--tlp-steel);
+      line-height: 1.5;
+    }
+
+    .dossier-footer-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--tlp-line);
+    }
+
+    .work-regime-note {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--tlp-steel);
+    }
+
+    .work-regime-note strong {
+      color: var(--tlp-white);
+    }
+
+    /* ==========================================================================
+       CONSTITUCIÓN LEGAL SAS & RESIDENCIA FISCAL
+       ========================================================================== */
+    .legal-grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+
+    .legal-spec-sheet {
+      border: 1px solid var(--tlp-line);
+      background: var(--tlp-surface);
+      padding: 2.5rem;
+    }
+
+    .sheet-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--tlp-white);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--tlp-line);
+    }
+
+    .technical-data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+    }
+
+    .technical-data-table tr {
+      border-bottom: 1px solid var(--tlp-line);
+    }
+
+    .technical-data-table td {
+      padding: 0.75rem 0;
+    }
+
+    .technical-data-table td.field-key {
+      color: var(--tlp-steel);
+      width: 40%;
+    }
+
+    .technical-data-table td.field-val {
+      color: var(--tlp-white);
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .founders-callout {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      background: var(--tlp-black);
+      border: 1px solid var(--tlp-line);
+    }
+
+    .founders-callout span {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--tlp-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .founders-callout p {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--tlp-white);
+    }
+
+    /* ==========================================================================
+       SECCIÓN DE CONTACTO & FORMULARIO
+       ========================================================================== */
+    .contact-split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 3.5rem;
+      margin-top: 3rem;
+    }
+
+    .contact-channels-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .channel-cell {
+      border: 1px solid var(--tlp-line);
+      background: var(--tlp-surface);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: var(--transition);
+    }
+
+    .channel-cell:hover {
+      border-color: var(--tlp-blue);
+      transform: translateX(4px);
+    }
+
+    .channel-cell .channel-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--tlp-steel);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .channel-cell .channel-data {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--tlp-white);
+    }
+
+    .channel-cell .channel-data:hover {
+      color: var(--tlp-blue);
+    }
+
+    .channel-cell .channel-sub {
+      font-size: 0.8rem;
+      color: var(--tlp-steel);
+    }
+
+    .contact-form-bracket {
+      border: 1px solid var(--tlp-line-bold);
+      background: var(--tlp-surface);
+      padding: 2.8rem;
+    }
+
+    .form-bracket-title {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--tlp-white);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    .form-bracket-subtitle {
+      font-size: 0.92rem;
+      color: var(--tlp-steel);
+      margin-bottom: 2rem;
+    }
+
+    .form-grid-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .input-field-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .input-label-tag {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--tlp-steel);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .input-control-chiseled {
+      width: 100%;
+      background: var(--tlp-black);
+      border: 1px solid var(--tlp-line);
+      padding: 0.85rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--tlp-white);
+      transition: var(--transition);
+    }
+
+    .input-control-chiseled:focus {
+      outline: none;
+      border-color: var(--tlp-blue);
+      background: #0d0e12;
+    }
+
+    textarea.input-control-chiseled {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .feedback-success-plate {
+      display: none;
+      margin-top: 1.25rem;
+      padding: 1.2rem;
+      border: 1px solid var(--tlp-blue);
+      background: var(--tlp-blue-tint);
+      color: var(--tlp-white);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .feedback-success-plate.active {
+      display: block;
+    }
+
+    /* ==========================================================================
+       MODAL LIGHTBOX
+       ========================================================================== */
+    .lightbox-curtain {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .lightbox-curtain.active {
+      display: flex;
+    }
+
+    .lightbox-frame {
+      max-width: 950px;
+      width: 100%;
+      background: var(--tlp-surface);
+      border: 1px solid var(--tlp-line-bold);
+      position: relative;
+    }
+
+    .lightbox-hero-img {
+      width: 100%;
+      max-height: 65vh;
+      object-fit: contain;
+      background: #000000;
+      display: block;
+    }
+
+    .lightbox-meta-dock {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--tlp-line);
+    }
+
+    .lightbox-close-trigger {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      background: #000000;
+      border: 1px solid var(--tlp-line);
+      color: var(--tlp-white);
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .lightbox-close-trigger:hover {
+      background: var(--tlp-blue);
+      border-color: var(--tlp-blue);
+    }
+
+    /* ==========================================================================
+       FOOTER SUIZO INSTITUCIONAL
+       ========================================================================== */
+    .mast-footer {
+      background: var(--tlp-black);
+      border-top: 1px solid var(--tlp-line);
+      padding: 5rem 0 2.5rem 0;
+    }
+
+    .footer-columns-block {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.25fr;
+      gap: 3.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .footer-brand-statement p {
+      color: var(--tlp-steel);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-top: 1rem;
+      max-width: 330px;
+    }
+
+    .footer-heading {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--tlp-white);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1.4rem;
+    }
+
+    .footer-nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-nav-list a {
+      font-size: 0.88rem;
+      color: var(--tlp-steel);
+    }
+
+    .footer-nav-list a:hover {
+      color: var(--tlp-white);
+      transform: translateX(4px);
+    }
+
+    .academic-utu-sheet {
+      border: 1px solid var(--tlp-line);
+      background: var(--tlp-surface);
+      padding: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--tlp-steel);
+      line-height: 1.6;
+    }
+
+    .academic-utu-sheet strong {
+      color: var(--tlp-white);
+    }
+
+    .academic-utu-sheet .utu-badge {
+      color: var(--tlp-blue);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-sub-legal {
+      border-top: 1px solid var(--tlp-line);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--tlp-steel);
+    }
+
+    /* ==========================================================================
+       MEDIA QUERIES RESPONSIVAS
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .manifesto-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .modular-services-grid {
+        grid-template-columns: 1fr;
+      }
+      .dossier-frame {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .legal-grid-layout {
+        grid-template-columns: 1fr;
+      }
+      .contact-split-layout {
+        grid-template-columns: 1fr;
+      }
+      .footer-columns-block {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navigation-links {
+        display: none;
+        position: absolute;
+        top: 78px;
+        left: 0;
+        width: 100%;
+        background: var(--tlp-black);
+        border-bottom: 1px solid var(--tlp-line);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+      }
+      .navigation-links.active {
+        display: flex;
+      }
+      .mobile-burger-btn {
+        display: block;
+      }
+      .hero-telemetry-strip {
+        grid-template-columns: 1fr;
+      }
+      .gallery-tile.col-span-7,
+      .gallery-tile.col-span-5,
+      .gallery-tile.col-span-4 {
+        grid-column: span 12;
+      }
+      .form-grid-pair {
+        grid-template-columns: 1fr;
+      }
+      .competency-matrix {
+        grid-template-columns: 1fr;
+      }
+      .footer-columns-block {
+        grid-template-columns: 1fr;
+      }
+      .pillar-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVEGACIÓN SUIZA
+       ========================================================================== -->
+  <header class="top-masthead">
+    <div class="container">
+      <div class="masthead-inner">
+        <a href="#inicio" class="brand-identity" title="TLP — Technical Line Projects">
+          <img src="img/logo.png" alt="TLP Logo" class="brand-logo-file">
+          <div class="brand-subtext">
+            Technical Line Projects S.A.S.<br>
+            San José · Uruguay
+          </div>
+        </a>
+
+        <nav class="navigation-links" id="navMenu">
+          <a href="#inicio" class="nav-anchor active">Inicio</a>
+          <a href="#manifiesto" class="nav-anchor">Identidad</a>
+          <a href="#servicios" class="nav-anchor">Servicios</a>
+          <a href="#obras" class="nav-anchor">Registro de Obra</a>
+          <a href="#armando" class="nav-anchor">Técnico Armando</a>
+          <a href="#contacto" class="nav-anchor">Contacto</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="tel:+59891234434" class="masthead-phone" title="Línea Directa">
+            091 234 434
+          </a>
+          <a href="#contacto" class="btn-swiss btn-swiss-primary" style="padding: 0.6rem 1.2rem; font-size: 0.78rem;">
+            Presupuesto
+          </a>
+          <button class="mobile-burger-btn" id="burgerToggle" aria-label="Menú">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO ASIMÉTRICO CON CARRUSEL DE OBRA (16:9)
+       ========================================================================== -->
+  <section class="hero-layout" id="inicio">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- COLUMNA TIPOGRÁFICA -->
+        <div class="hero-editorial">
+          <div class="meta-tag">
+            <span class="tag-indicator"></span>
+            Ingeniería de Telecomunicaciones & Redes LAN
+          </div>
+
+          <h1 class="hero-headline">
+            Infraestructura de Red con <span class="accent">Precisión Quirúrgica</span>.
+          </h1>
+
+          <p class="lead-paragraph">
+            En <strong>Technical Line Projects S.A.S.</strong> erradicamos el caos en salas de comunicaciones. Planificamos, montamos y certificamos cableado estructurado Cat 6/6A, racks de alta densidad y equipamiento activo con rigor de ingeniería suiza.
+          </p>
+
+          <div class="hero-actions-row">
+            <a href="#contacto" class="btn-swiss btn-swiss-primary">
+              Solicitar Cotización Técnica
+            </a>
+            <a href="https://wa.me/59891234434?text=Hola%20TLP,%20solicito%20asesoramiento%20para%20una%20instalación%20de%20redes" target="_blank" rel="noopener noreferrer" class="btn-swiss btn-swiss-ghost">
+              WhatsApp Directo
+            </a>
+          </div>
+
+          <div class="hero-telemetry-strip">
+            <div class="telemetry-cell">
+              <div class="telemetry-val">100<span>%</span></div>
+              <div class="telemetry-lbl">Normado TIA-568-C</div>
+            </div>
+            <div class="telemetry-cell">
+              <div class="telemetry-val">Cat <span>6/6A</span></div>
+              <div class="telemetry-lbl">UTP Certificado</div>
+            </div>
+            <div class="telemetry-cell">
+              <div class="telemetry-val">S.A.S.</div>
+              <div class="telemetry-lbl">Ley Nº 19.820 BPS/DGI</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VISOR PANORÁMICO DE INSPECCIÓN (CARRUSEL 5 FOTOS) -->
+        <div class="hero-viewer-col">
+          <div class="inspection-viewer" id="carouselViewer" onmouseenter="freezeCarousel()" onmouseleave="unfreezeCarousel()">
+            
+            <div class="viewer-header-bar">
+              <div class="viewer-live-tag">
+                <span class="live-dot"></span> TLP FIELD OPERATIONS · SAN JOSÉ
+              </div>
+              <div>REGISTRO VISUAL DE INSTALACIONES</div>
+            </div>
+
+            <div class="viewer-stage">
+              <!-- SLIDE 1: imaasdges.jpeg -->
+              <div class="viewer-slide active" data-slide="0">
+                <img src="img/imaasdges.jpeg" alt="Peinado de cables azules Cat 6A en rack" class="viewer-img">
+                <div class="viewer-caption-panel">
+                  <div class="caption-meta">01 // CABLEADO ESTRUCTURADO</div>
+                  <h3 class="caption-title">Peinado de Racks de Alta Densidad</h3>
+                  <p class="caption-desc">Distribución milimétrica de cables UTP Cat 6A sin tensiones mecánicas ni cruces espurios.</p>
+                </div>
+              </div>
+
+              <!-- SLIDE 2: imagasdes.jpeg -->
+              <div class="viewer-slide" data-slide="1">
+                <img src="img/imagasdes.jpeg" alt="Técnico realizando conectorización en patch panels" class="viewer-img">
+                <div class="viewer-caption-panel">
+                  <div class="caption-meta">02 // CONECTORIZACIÓN DE PRECISIÓN</div>
+                  <h3 class="caption-title">Terminación y Crimpado en Patch Panels</h3>
+                  <p class="caption-desc">Conexión pin a pin con herramientas de impacto según la norma TIA/EIA-568-C.</p>
+                </div>
+              </div>
+
+              <!-- SLIDE 3: images.jpeg -->
+              <div class="viewer-slide" data-slide="2">
+                <img src="img/images.jpeg" alt="Interconexión activa de switches y fibra óptica" class="viewer-img">
+                <div class="viewer-caption-panel">
+                  <div class="caption-meta">03 // EQUIPAMIENTO ACTIVO</div>
+                  <h3 class="caption-title">Interconexión y Gestión de Tráfico LAN</h3>
+                  <p class="caption-desc">Montaje de switches administrables gigabit y balanceo de carga para oficinas corporativas.</p>
+                </div>
+              </div>
+
+              <!-- SLIDE 4: instalacion_pequeño_armario_rack_6.jpg -->
+              <div class="viewer-slide" data-slide="3">
+                <img src="img/instalacion_pequeño_armario_rack_6.jpg" alt="Rack mural de oficina instalado" class="viewer-img">
+                <div class="viewer-caption-panel">
+                  <div class="caption-meta">04 // SOLUCIONES COMPACTAS PyME</div>
+                  <h3 class="caption-title">Gabinetes Murales para Oficinas</h3>
+                  <p class="caption-desc">Armarios de pared con cerradura de seguridad, ventilación pasiva y ordenamiento integrado.</p>
+                </div>
+              </div>
+
+              <!-- SLIDE 5: un-electricista... -->
+              <div class="viewer-slide" data-slide="4">
+                <img src="img/un-electricista-trabaja-en-una-central-electrica-con-un-mono-en-el-telon-de-fondo-de-la-iluminacion-de-emergencia-scaled-1707x1707.jpg" alt="Instalaciones eléctricas y de telecomunicaciones" class="viewer-img">
+                <div class="viewer-caption-panel">
+                  <div class="caption-meta">05 // RUBRO DGI 43210</div>
+                  <h3 class="caption-title">Líneas Eléctricas de Telecomunicaciones</h3>
+                  <p class="caption-desc">Canalización de potencia protegida y puesta a tierra para salas de servidores.</p>
+                </div>
+              </div>
+
+              <!-- FLECHAS DE CONTROL -->
+              <button class="viewer-nav-btn prev" onclick="stepBackward()" aria-label="Anterior">
+                &#8592;
+              </button>
+              <button class="viewer-nav-btn next" onclick="stepForward()" aria-label="Siguiente">
+                &#8594;
+              </button>
+            </div>
+
+            <!-- DOCK DE CONTROL -->
+            <div class="viewer-footer-dock">
+              <div class="indicators-segmented-bar" id="indicatorBar">
+                <div class="segmented-step active" onclick="jumpTo(0)"><div class="step-progress-fill"></div></div>
+                <div class="segmented-step" onclick="jumpTo(1)"><div class="step-progress-fill"></div></div>
+                <div class="segmented-step" onclick="jumpTo(2)"><div class="step-progress-fill"></div></div>
+                <div class="segmented-step" onclick="jumpTo(3)"><div class="step-progress-fill"></div></div>
+                <div class="segmented-step" onclick="jumpTo(4)"><div class="step-progress-fill"></div></div>
+              </div>
+              <div class="viewer-counter-display">
+                [ <span class="active-num" id="slideIndexLabel">01</span> / 05 ]
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       MANIFIESTO DE IDENTIDAD: EL PORQUÉ DE "TECHNICAL LINE PROJECTS"
+       ========================================================================== -->
+  <section class="manifesto-ribbon" id="manifiesto">
+    <div class="container">
+      <div class="manifesto-grid">
+        <div>
+          <div class="meta-tag">
+            <span class="tag-indicator"></span>
+            Arquitectura de Marca
+          </div>
+          <h2 class="section-headline" style="font-size: 2.8rem; margin-top: 0.8rem;">
+            El Significado Detrás de <span class="accent">TLP</span>.
+          </h2>
+          <p class="lead-paragraph">
+            No creemos en soluciones improvisadas ni en enredos de cables sin etiquetar. Nuestra identidad corporativa se fundamenta en tres premisas innegociables:
+          </p>
+        </div>
+
+        <div class="manifesto-pillars">
+          <div class="pillar-row">
+            <div class="pillar-word">Technical</div>
+            <div class="pillar-meaning">
+              Conocimiento técnico especializado en ingeniería de redes, servidores, switches y normativas de telecomunicaciones. Rigor operativo en cada conector.
+            </div>
+          </div>
+
+          <div class="pillar-row">
+            <div class="pillar-word">Line</div>
+            <div class="pillar-meaning">
+              Alusión directa al cableado estructurado y las líneas de transmisión de datos, pero también a una línea de trabajo recta, ordenada y pulcra.
+            </div>
+          </div>
+
+          <div class="pillar-row">
+            <div class="pillar-word">Projects</div>
+            <div class="pillar-meaning">
+              Cada cliente y cada oficina es un proyecto de ingeniería único que acompañamos desde la canalización inicial hasta la puesta en marcha.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       GRILLA MODULAR DE SERVICIOS (CUADRANTES DE 1PX)
+       ========================================================================== -->
+  <section class="section-padding" id="servicios">
+    <div class="container">
+      <div class="meta-tag">
+        <span class="tag-indicator"></span>
+        Rubros Registrados DGI 43210 & 62090
+      </div>
+      <h2 class="section-headline">
+        Catálogo de <span class="accent">Capacidades Técnicas</span>.
+      </h2>
+
+      <div class="modular-services-grid">
+        <!-- CUADRANTE 01 -->
+        <div class="service-quadrant">
+          <div>
+            <div class="quadrant-top">
+              <span class="quadrant-index">01</span>
+              <span class="quadrant-code">INFRA // RACK-MOUNT</span>
+            </div>
+            <h3 class="quadrant-title">Montaje y Peinado de Racks de Comunicaciones</h3>
+            <p class="quadrant-text">
+              Fijación estructural de gabinetes de piso y pared. Organización con guías horizontales y verticales de 1U/2U, bandejas ventiladas y distribución eléctrica protegida.
+            </p>
+          </div>
+          <ul class="spec-points-list">
+            <li>Cero tensión mecánica sobre los conectores RJ45</li>
+            <li>Disipación térmica optimizada para equipos activos</li>
+          </ul>
+        </div>
+
+        <!-- CUADRANTE 02 -->
+        <div class="service-quadrant">
+          <div>
+            <div class="quadrant-top">
+              <span class="quadrant-index">02</span>
+              <span class="quadrant-code">COPPER // CAT-6A</span>
+            </div>
+            <h3 class="quadrant-title">Cableado Estructurado UTP (Cat 6 & 6A)</h3>
+            <p class="quadrant-text">
+              Tendido normado por bandejas portacables de alambre y ductos perimetrales. Conectorización certificada en patch panels y rosetas de usuario final.
+            </p>
+          </div>
+          <ul class="spec-points-list">
+            <li>Etiquetado alfanumérico normado en ambos extremos</li>
+            <li>Cumplimiento estricto de norma TIA/EIA-568-C</li>
+          </ul>
+        </div>
+
+        <!-- CUADRANTE 03 -->
+        <div class="service-quadrant">
+          <div>
+            <div class="quadrant-top">
+              <span class="quadrant-index">03</span>
+              <span class="quadrant-code">ACTIVE // L2-L3</span>
+            </div>
+            <h3 class="quadrant-title">Switches Administrables & Servidores</h3>
+            <p class="quadrant-text">
+              Colocación en bastidor de switches gestionables, routers de borde y servidores. Segmentación por VLANs y verificación de atenuación en enlaces troncales.
+            </p>
+          </div>
+          <ul class="spec-points-list">
+            <li>Parcheo puerto a puerto con codificación por color</li>
+            <li>Verificación de velocidad gigabit en cada boca</li>
+          </ul>
+        </div>
+
+        <!-- CUADRANTE 04 -->
+        <div class="service-quadrant">
+          <div>
+            <div class="quadrant-top">
+              <span class="quadrant-index">04</span>
+              <span class="quadrant-code">AUDIT // RE-ORDER</span>
+            </div>
+            <h3 class="quadrant-title">Saneamiento y Reordenamiento de Racks</h3>
+            <p class="quadrant-text">
+              Intervención en racks colapsados. Identificación de enlaces ciegos, depuración de cables en desuso, reemplazo de patch cords y entrega de plano topológico.
+            </p>
+          </div>
+          <ul class="spec-points-list">
+            <li>Intervenciones programadas en horarios sin impacto laboral</li>
+            <li>Documentación completa del mapa de puertos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       REGISTRO VISUAL DE OBRA — GALERÍA ASIMÉTRICA CON LIGHTBOX
+       ========================================================================== -->
+  <section class="section-padding" id="obras">
+    <div class="container">
+      <div class="meta-tag">
+        <span class="tag-indicator"></span>
+        Inspección Técnica en Campo
+      </div>
+      <h2 class="section-headline">
+        Galería de <span class="accent">Instalaciones Reales</span>.
+      </h2>
+      <p class="lead-paragraph">
+        Haz clic en cualquier proyecto para examinar el montaje a escala completa.
+      </p>
+
+      <div class="editorial-gallery-grid">
+        <!-- TILE 1 (GRANDE: 7 COLUMNAS) -->
+        <div class="gallery-tile col-span-7" onclick="launchModal('img/imaasdges.jpeg', 'Peinado de Alta Densidad en Racks', 'Cableado UTP Cat 6A peinado con bridas de velcro y sujeción simétrica en sala central.')">
+          <div class="tile-visual-wrap" style="height: 340px;">
+            <img src="img/imaasdges.jpeg" alt="Peinado de cables azules" class="tile-visual">
+          </div>
+          <div class="tile-meta-content">
+            <span class="tile-meta-tag">01 // Infraestructura Central</span>
+            <h4 class="tile-title">Peinado de Racks de Servidores</h4>
+            <p class="tile-desc">Curvatura controlada y distribución en peine peine para salas corporativas de alta densidad.</p>
+          </div>
+        </div>
+
+        <!-- TILE 2 (MEDIANO: 5 COLUMNAS) -->
+        <div class="gallery-tile col-span-5" onclick="launchModal('img/imagasdes.jpeg', 'Conectorización y Crimpado Normado', 'Uso de herramientas de impacto y terminación en patch panels bajo estándar TIA-568-C.')">
+          <div class="tile-visual-wrap" style="height: 340px;">
+            <img src="img/imagasdes.jpeg" alt="Crimpado de cables" class="tile-visual">
+          </div>
+          <div class="tile-meta-content">
+            <span class="tile-meta-tag">02 // Terminación de Datos</span>
+            <h4 class="tile-title">Crimpado y Patch Panels</h4>
+            <p class="tile-desc">Conectorización certificada con instrumental de impacto para cero pérdidas de paquetes.</p>
+          </div>
+        </div>
+
+        <!-- TILE 3 (4 COLUMNAS) -->
+        <div class="gallery-tile col-span-4" onclick="launchModal('img/images.jpeg', 'Switches Administrables y Fibra Óptica', 'Distribución de tráfico LAN corporativo con enlaces troncales de alta velocidad.')">
+          <div class="tile-visual-wrap">
+            <img src="img/images.jpeg" alt="Switches y fibra" class="tile-visual">
+          </div>
+          <div class="tile-meta-content">
+            <span class="tile-meta-tag">03 // Equipamiento Activo</span>
+            <h4 class="tile-title">Switches & Enlaces Troncales</h4>
+            <p class="tile-desc">Interconexión activa gigabit y balanceo de carga para oficinas.</p>
+          </div>
+        </div>
+
+        <!-- TILE 4 (4 COLUMNAS) -->
+        <div class="gallery-tile col-span-4" onclick="launchModal('img/instalacion_pequeño_armario_rack_6.jpg', 'Gabinete Mural para Oficinas', 'Montaje de armario de pared compacto con llave de seguridad, patch panel y switch.')">
+          <div class="tile-visual-wrap">
+            <img src="img/instalacion_pequeño_armario_rack_6.jpg" alt="Rack mural compacto" class="tile-visual">
+          </div>
+          <div class="tile-meta-content">
+            <span class="tile-meta-tag">04 // Soluciones PyME</span>
+            <h4 class="tile-title">Rack Mural de Oficina</h4>
+            <p class="tile-desc">Espacios optimizados con acceso seguro y protección contra polvo.</p>
+          </div>
+        </div>
+
+        <!-- TILE 5 (4 COLUMNAS) -->
+        <div class="gallery-tile col-span-4" onclick="launchModal('img/un-electricista-trabaja-en-una-central-electrica-con-un-mono-en-el-telon-de-fondo-de-la-iluminacion-de-emergencia-scaled-1707x1707.jpg', 'Infraestructura Eléctrica y Telecomunicaciones', 'Especialistas matriculados para tableros y líneas de potencia bajo Rubro DGI 43210.')">
+          <div class="tile-visual-wrap">
+            <img src="img/un-electricista-trabaja-en-una-central-electrica-con-un-mono-en-el-telon-de-fondo-de-la-iluminacion-de-emergencia-scaled-1707x1707.jpg" alt="Instalaciones de potencia" class="tile-visual">
+          </div>
+          <div class="tile-meta-content">
+            <span class="tile-meta-tag">05 // Rubro DGI 43210</span>
+            <h4 class="tile-title">Líneas Eléctricas de Red</h4>
+            <p class="tile-desc">Alimentación ininterrumpida y protección de centros de cómputo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       DOSSIER EDITORIAL: PERFIL PROFESIONAL DE ARMANDO MURITOS DEL POZO
+       (FOTO EXCLUSIVA ArmandoMuritosFotoPerfil.png)
+       ========================================================================== -->
+  <section class="section-padding" id="armando">
+    <div class="container">
+      <div class="meta-tag">
+        <span class="tag-indicator"></span>
+        Personal Técnico en Relación de Dependencia
+      </div>
+      <h2 class="section-headline">
+        Acreditación del <span class="accent">Responsable Técnico</span>.
+      </h2>
+
+      <div class="dossier-frame">
+        <div class="dossier-corner-stamp">
+          TLP · SPEC #01
+        </div>
+
+        <!-- FOTO DE ARMANDO CON MARCO EDITORIAL -->
+        <div class="dossier-portrait-column">
+          <div class="portrait-image-mount">
+            <img src="img/ArmandoMuritosFotoPerfil.png" alt="Armando Muritos Del Pozo — Técnico en Redes TLP">
+          </div>
+          <div class="id-credential-plate">
+            <div>ID: <strong>TLP-TECH-01</strong></div>
+            <div>Cédula: <strong>4.696.696-9</strong></div>
+            <div class="status-active-pill">● TÉCNICO REGISTRADO & ACTIVO</div>
+          </div>
+        </div>
+
+        <!-- FICHA Y COMPETENCIAS -->
+        <div class="dossier-body-column">
+          <div>
+            <div class="technician-rank">Técnico en Redes e Infraestructura</div>
+            <h3 class="technician-name-title">Armando Muritos Del Pozo</h3>
+          </div>
+
+          <p class="technician-narrative">
+            Armando lidera la ejecución en campo de <strong>Technical Line Projects S.A.S.</strong> bajo contrato laboral formalizado (Ley Nº 19.820). Se distingue por su meticulosidad en el peinado de cableados de alta densidad, la fijación estructural de gabinetes y la estricta sujeción a las normas internacionales de telecomunicaciones, garantizando que cada red entregada responda a los estándares más exigentes de estabilidad y prolijidad.
+          </p>
+
+          <div class="competency-matrix">
+            <div class="matrix-item">
+              <h5>Armado & Montaje de Racks</h5>
+              <p>Fijación a plomo de gabinetes, organización milimétrica de patch panels y peinado simétrico con bridas de sujeción.</p>
+            </div>
+
+            <div class="matrix-item">
+              <h5>Cableado UTP Cat 6 y 6A</h5>
+              <p>Tendido por bandejas, conectorización certificada RJ45 y rotulado alfanumérico normado en ambos extremos.</p>
+            </div>
+
+            <div class="matrix-item">
+              <h5>Equipamiento Activo (Switches & Routers)</h5>
+              <p>Montaje físico en bastidor, energización protegida y verificación de enlaces gigabit y continuidad de señal.</p>
+            </div>
+
+            <div class="matrix-item">
+              <h5>Disciplina & Respeto Operativo</h5>
+              <p>Régimen laboral de 40 horas semanales (Lunes a Viernes de 09:00 a 17:00 hs), minimizando toda disrupción al cliente.</p>
+            </div>
+          </div>
+
+          <div class="dossier-footer-actions">
+            <div class="work-regime-note">
+              Régimen laboral: <strong>40 hs semanales</strong> · BPS y Cobertura BSE al día
+            </div>
+            <a href="https://wa.me/59891234434?text=Hola%20Armando,%20quisiera%20coordinar%20una%20visita%20técnica%20de%20TLP" target="_blank" rel="noopener noreferrer" class="btn-swiss btn-swiss-primary" style="padding: 0.65rem 1.4rem;">
+              Coordinar con Armando vía WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CONSTITUCIÓN LEGAL SAS & RESIDENCIA FISCAL
+       ========================================================================== -->
+  <section class="section-padding" id="empresa">
+    <div class="container">
+      <div class="meta-tag">
+        <span class="tag-indicator"></span>
+        Marco Regulatorio República Oriental del Uruguay
+      </div>
+      <h2 class="section-headline">
+        Constitución & <span class="accent">Respaldo Jurídico</span>.
+      </h2>
+
+      <div class="legal-grid-layout">
+        <div>
+          <p class="lead-paragraph" style="margin-bottom: 1.5rem;">
+            Technical Line Projects opera bajo la personería jurídica de <strong>Sociedad por Acciones Simplificada (S.A.S.)</strong> al amparo de la <strong>Ley Nº 19.820</strong>, brindando a empresas privadas y organismos públicos un respaldo formal, emisión de facturas oficiales y estricto cumplimiento tributario ante BPS y DGI.
+          </p>
+          <div class="founders-callout">
+            <span>Socios Fundadores</span>
+            <p>Manuel Pintaluba · Leandro Alonso · Rodrigo Alonso</p>
+          </div>
+        </div>
+
+        <div class="legal-spec-sheet">
+          <div class="sheet-title">Ficha Técnica Empresarial</div>
+          <table class="technical-data-table">
+            <tr>
+              <td class="field-key">Razón Social:</td>
+              <td class="field-val">Technical Line Projects S.A.S.</td>
+            </tr>
+            <tr>
+              <td class="field-key">Forma Jurídica:</td>
+              <td class="field-val">Sociedad por Acciones Simplificada</td>
+            </tr>
+            <tr>
+              <td class="field-key">Régimen Legal:</td>
+              <td class="field-val">Ley Nº 19.820 (BPS y DGI)</td>
+            </tr>
+            <tr>
+              <td class="field-key">Rubro Principal:</td>
+              <td class="field-val">DGI 43210 (Instalación eléctrica y comunicaciones)</td>
+            </tr>
+            <tr>
+              <td class="field-key">Rubro Secundario:</td>
+              <td class="field-val">DGI 62090 (TI y servicios de computadoras)</td>
+            </tr>
+            <tr>
+              <td class="field-key">Domicilio Social:</td>
+              <td class="field-val">Bulevar Artigas, Ituzaingó · San José</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECCIÓN DE CONTACTO & FORMULARIO
+       ========================================================================== -->
+  <section class="section-padding" id="contacto">
+    <div class="container">
+      <div class="meta-tag">
+        <span class="tag-indicator"></span>
+        Canales Directos de Comunicación
+      </div>
+      <h2 class="section-headline">
+        Inicie su <span class="accent">Proyecto de Red</span>.
+      </h2>
+
+      <div class="contact-split-layout">
+        <!-- CANALES DIRECTOS -->
+        <div class="contact-channels-panel">
+          <div class="channel-cell">
+            <span class="channel-label">Línea Telefónica Directa</span>
+            <a href="tel:+59891234434" class="channel-data">091 234 434</a>
+            <span class="channel-sub">Atención comercial y coordinación en campo</span>
+          </div>
+
+          <div class="channel-cell">
+            <span class="channel-label">Correo Electrónico Oficial</span>
+            <a href="mailto:contacto@tlp.com.uy" class="channel-data">contacto@tlp.com.uy</a>
+            <span class="channel-sub">Recepción de planos y pliegos de licitación</span>
+          </div>
+
+          <div class="channel-cell">
+            <span class="channel-label">Base de Operaciones</span>
+            <div class="channel-data" style="font-size: 1.15rem;">Bulevar Artigas, Ituzaingó</div>
+            <span class="channel-sub">San José de Mayo · Departamento de San José, Uruguay</span>
+          </div>
+
+          <div class="channel-cell">
+            <span class="channel-label">Horario Técnico</span>
+            <div class="channel-data" style="font-size: 1.15rem;">Lunes a Viernes · 09:00 a 17:00 hs</div>
+            <span class="channel-sub">Guardias para mantenimiento programado</span>
+          </div>
+
+          <a href="https://wa.me/59891234434?text=Hola%20TLP,%20solicito%20presupuesto%20para%20una%20instalación%20de%20redes" target="_blank" rel="noopener noreferrer" class="btn-swiss btn-swiss-primary">
+            Chatear por WhatsApp con TLP
+          </a>
+        </div>
+
+        <!-- FORMULARIO TÉCNICO -->
+        <div class="contact-form-bracket">
+          <h3 class="form-bracket-title">Solicitar Cotización Formal</h3>
+          <p class="form-bracket-subtitle">Complete los parámetros de su requerimiento. Respuesta en menos de 24 horas hábiles.</p>
+
+          <form id="contactFormSwiss" onsubmit="processForm(event)">
+            <div class="form-grid-pair">
+              <div>
+                <label class="input-label-tag" for="fName">Nombre y Apellido *</label>
+                <input type="text" id="fName" class="input-control-chiseled" placeholder="Ej: Martín Rodríguez" required>
+              </div>
+              <div>
+                <label class="input-label-tag" for="fCompany">Empresa u Oficina</label>
+                <input type="text" id="fCompany" class="input-control-chiseled" placeholder="Ej: Consultora Sur SRL">
+              </div>
+            </div>
+
+            <div class="form-grid-pair">
+              <div>
+                <label class="input-label-tag" for="fEmail">Correo Electrónico *</label>
+                <input type="email" id="fEmail" class="input-control-chiseled" placeholder="correo@empresa.com" required>
+              </div>
+              <div>
+                <label class="input-label-tag" for="fPhone">Teléfono de Contacto *</label>
+                <input type="tel" id="fPhone" class="input-control-chiseled" placeholder="099 123 456" required>
+              </div>
+            </div>
+
+            <div class="input-field-group">
+              <label class="input-label-tag" for="fService">Categoría del Servicio *</label>
+              <select id="fService" class="input-control-chiseled" required>
+                <option value="">Seleccione un servicio...</option>
+                <option value="cableado">Cableado Estructurado UTP (Cat 6 / 6A)</option>
+                <option value="rack">Armado y Montaje de Racks</option>
+                <option value="switches">Configuración de Switches & Servidores</option>
+                <option value="saneamiento">Saneamiento y Reordenamiento de Redes</option>
+                <option value="consulta">Otra consulta técnica</option>
+              </select>
+            </div>
+
+            <div class="input-field-group">
+              <label class="input-label-tag" for="fMsg">Especificación del Proyecto *</label>
+              <textarea id="fMsg" class="input-control-chiseled" placeholder="Indique cantidad aproximada de puestos de red, metros de ductado o estado actual del gabinete..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-swiss btn-swiss-primary" style="width: 100%;">
+              Enviar Requerimiento Técnico
+            </button>
+
+            <div id="formSuccessAlert" class="feedback-success-plate">
+              <strong>[ REQUERIMIENTO TRANSMITIDO ]</strong><br>
+              Nuestro equipo de ingeniería y <em>Armando Muritos Del Pozo</em> evaluarán su solicitud y tomarán contacto en el horario laboral de 09:00 a 17:00 hs.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       MODAL LIGHTBOX
+       ========================================================================== -->
+  <div class="lightbox-curtain" id="lightboxCurtain" onclick="dismissModal(event)">
+    <div class="lightbox-frame" onclick="event.stopPropagation()">
+      <button class="lightbox-close-trigger" onclick="dismissModal(event)">✕</button>
+      <img id="modalVisual" src="" alt="Detalle" class="lightbox-hero-img">
+      <div class="lightbox-meta-dock">
+        <h4 id="modalHeading" style="font-family: var(--font-display); font-size: 1.25rem; color: var(--tlp-white); margin-bottom: 0.35rem;"></h4>
+        <p id="modalDescription" style="font-size: 0.88rem; color: var(--tlp-steel); line-height: 1.5;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER INSTITUCIONAL SUIZO
+       ========================================================================== -->
+  <footer class="mast-footer">
+    <div class="container">
+      <div class="footer-columns-block">
+        <div class="footer-brand-statement">
+          <img src="img/logo.png" alt="TLP Logo Footer" style="height: 38px; display: block;">
+          <p>
+            Technical Line Projects (TLP) S.A.S. — Ingeniería en telecomunicaciones y cableado estructurado. Respaldo formal, orden suizo y trazabilidad total para empresas uruguayas.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-heading">Navegación</div>
+          <div class="footer-nav-list">
+            <a href="#inicio">Inicio</a>
+            <a href="#manifiesto">Identidad</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#obras">Registro de Obra</a>
+            <a href="#armando">Técnico Armando</a>
+            <a href="#contacto">Contacto</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-heading">Líneas Directas</div>
+          <div class="footer-nav-list">
+            <a href="tel:+59891234434">Tel: 091 234 434</a>
+            <a href="mailto:contacto@tlp.com.uy">contacto@tlp.com.uy</a>
+            <a href="#contacto">Bulevar Artigas, Ituzaingó</a>
+            <a href="#contacto">San José, Uruguay</a>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--tlp-steel); margin-top: 0.3rem;">Lun - Vie: 09:00 - 17:00 hs</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="academic-utu-sheet">
+            <span class="utu-badge">PROYECTO ACADÉMICO UTU</span>
+            <strong>Escuela Técnica María Espínola</strong><br>
+            San José, Uruguay · Noviembre 2026<br>
+            <strong>Materia:</strong> Legislación / Segunda Prueba Semestral<br>
+            <strong>Docente:</strong> Prof. Yulisa Freite<br>
+            <strong>Estudiantes:</strong> Alonso Leandro, Alonso Rodrigo, Pintaluba Manuel.
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-sub-legal">
+        <div>
+          © 2026 Technical Line Projects S.A.S. (TLP). Todos los derechos reservados.
+        </div>
+        <div>
+          DGI 43210 (Instalaciones Eléctricas y Telecomunicaciones) · 62090 (TI y Computadoras)
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       JAVASCRIPT: CARRUSEL MECÁNICO, LIGHTBOX Y FORMULARIO
+       ========================================================================== -->
+  <script>
+    // 1. CARRUSEL MECÁNICO DE LA PORTADA
+    let activeIndex = 0;
+    const slides = document.querySelectorAll('.viewer-slide');
+    const totalSlides = slides.length;
+    const steps = document.querySelectorAll('.segmented-step');
+    const counterDisplay = document.getElementById('slideIndexLabel');
+    let autoInterval = null;
+    let isFrozen = false;
+
+    function renderSlide(index) {
+      if (index >= totalSlides) activeIndex = 0;
+      else if (index < 0) activeIndex = totalSlides - 1;
+      else activeIndex = index;
+
+      slides.forEach((slide, i) => {
+        if (i === activeIndex) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      steps.forEach((step, i) => {
+        if (i === activeIndex) {
+          step.classList.add('active');
+        } else {
+          step.classList.remove('active');
+        }
+      });
+
+      if (counterDisplay) {
+        counterDisplay.textContent = String(activeIndex + 1).padStart(2, '0');
+      }
+    }
+
+    function stepForward() {
+      renderSlide(activeIndex + 1);
+      restartInterval();
+    }
+
+    function stepBackward() {
+      renderSlide(activeIndex - 1);
+      restartInterval();
+    }
+
+    function jumpTo(index) {
+      renderSlide(index);
+      restartInterval();
+    }
+
+    function initInterval() {
+      if (autoInterval) clearInterval(autoInterval);
+      autoInterval = setInterval(() => {
+        if (!isFrozen) {
+          renderSlide(activeIndex + 1);
+        }
+      }, 4500);
+    }
+
+    function restartInterval() {
+      initInterval();
+    }
+
+    function freezeCarousel() {
+      isFrozen = true;
+    }
+
+    function unfreezeCarousel() {
+      isFrozen = false;
+    }
+
+    initInterval();
+
+    // 2. MODAL LIGHTBOX
+    function launchModal(src, title, description) {
+      const modal = document.getElementById('lightboxCurtain');
+      const img = document.getElementById('modalVisual');
+      const head = document.getElementById('modalHeading');
+      const desc = document.getElementById('modalDescription');
+      if (modal && img && head && desc) {
+        img.src = src;
+        head.textContent = title;
+        desc.textContent = description;
+        modal.classList.add('active');
+      }
+    }
+
+    function dismissModal(event) {
+      const modal = document.getElementById('lightboxCurtain');
+      if (modal) {
+        modal.classList.remove('active');
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        dismissModal();
+      }
+    });
+
+    // 3. ENVÍO DE FORMULARIO
+    function processForm(event) {
+      event.preventDefault();
+      const btn = event.target.querySelector('button[type="submit"]');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = 'Transmitiendo...';
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+        const alert = document.getElementById('formSuccessAlert');
+        alert.classList.add('active');
+        event.target.reset();
+
+        setTimeout(() => {
+          alert.classList.remove('active');
+        }, 8000);
+      }, 700);
+    }
+
+    // 4. MENÚ MÓVIL
+    const burgerToggle = document.getElementById('burgerToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (burgerToggle && navMenu) {
+      burgerToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+      });
+
+      document.querySelectorAll('.nav-anchor').forEach(anchor => {
+        anchor.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+        });
+      });
+    }
+
+    // 5. RESALTADO SEGÚN DESPLAZAMIENTO
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.pageYOffset;
+      sections.forEach(sec => {
+        const top = sec.offsetTop - 120;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+        const link = document.querySelector(`.nav-anchor[href*="${id}"]`);
+        if (link) {
+          if (scrollY >= top && scrollY < top + height) {
+            document.querySelectorAll('.nav-anchor').forEach(a => a.classList.remove('active'));
+            link.classList.add('active');
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
